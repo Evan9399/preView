@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="file">上傳圖片：</label>
+      <input type="file" id="file" name="file" accept="image/*" />
+      <br />
+      <button type="submit">上傳</button>
+      <br />
+      <img
+        id="preview"
+        alt="圖片預覽"
+        style="max-width: 300px; margin-top: 10px"
+      />
+    </form>
+  </body>
+  <script>
+    const form = document.querySelector("form");
+    const img = document.getElementById("preview");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const file = document.querySelector("#file").files[0];
+      if (!file) {
+        alert("請先選擇一個圖片檔案！");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        img.src = reader.result;
+        console.log("🚀 ~ reader.result:", reader.result);
+      };
+      reader.onerror = () => {
+        alert("讀取圖片失敗！");
+      };
+    });
+  </script>
+</html>
