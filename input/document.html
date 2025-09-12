@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="title">標題</h1>
+    <img id="photo" src="../kabi.jpg" /><br />
+    <button id="btn">點我</button>
+    <script>
+      let title = document.getElementById("title");
+      console.log("🚀 ~ title:", title.textContent);
+      title.textContent = "yoyoyo";
+      title.innerHTML =
+        "<span style='font-weight: bold;'>這段文字是粗體</span>";
+      let img = document.getElementById("photo");
+      document.getElementById("btn").addEventListener("click", function () {
+        alert("你點到了！");
+      });
+      let newSpan = document.createElement("span");
+      newSpan.textContent = "從script插入";
+      btn.appendChild(newSpan); // 新增到 body 裡
+    </script>
+  </body>
+</html>
