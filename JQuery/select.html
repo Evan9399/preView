@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="mainContainer">
+      <h1 id="pageTitle">網頁標題</h1>
+      <p class="intro-text">這是一個介紹性段落。</p>
+      <p class="intro-text highlight">這是另一個被強調的介紹性段落。</p>
+
+      <ul id="myList">
+        <li>項目 A</li>
+        <li class="active">項目 B</li>
+        <li>項目 C</li>
+        <li class="active">項目 D</li>
+        <li>項目 E</li>
+      </ul>
+
+      <form>
+        <input type="text" name="username" value="使用者名稱" />
+        <input type="password" name="password" value="密碼" />
+        <input type="radio" name="gender" value="male" checked /> 男
+        <input type="radio" name="gender" value="female" /> 女
+        <button type="submit" name="submitButton">提交</button>
+        <button type="button" name="cancelButton">取消</button>
+      </form>
+
+      <div class="hidden-box" style="display: none">這是一個隱藏的內容。</div>
+    </div>
+    <!-- 引用JQuery -->
+    <script src="../lib/jquery-3.7.1.min.js"></script>
+    <script>
+      const myList = $("#myList"); //#是抓id
+      console.log("🚀 ~ myList:", myList);
+      const active = $(".active"); //.是抓class
+      console.log("🚀 ~ active:", active);
+
+      const pList = document.getElementsByTagName("p");
+      pList[0].textContent;
+      console.log("🚀 ~ pList[0].textContent:", pList[0].textContent);
+      const pjq = $("p");
+      pjq.eq(0).text(); //JQuery的寫法有不同
+      console.log("🚀 ~ pjq.eq(0).text():", pjq.eq(0).text());
+
+      const title = document.getElementById("pageTitle").textContent;
+      console.log("🚀 ~ title:", title);
+
+      const gender = document.getElementsByName("gender");
+      gender[0].value;
+      console.log("🚀 ~ gender[0].value:", gender[0].value);
+
+      const genderJqu = $('input[name="gender"]');
+      genderJqu.eq(0).val();
+      console.log("🚀 ~ genderJqu.eq(0).val:", genderJqu.eq(0).val());
+
+      //練習 抓項目D
+      const projectD = document.getElementsByTagName("li");
+      projectD[3].textContent;
+      console.log("🚀 ~ projectD[3].textContent:", projectD[3].textContent);
+      const projectDJqu = $("li");
+      projectDJqu.eq(3).text();
+      console.log("🚀 ~ projectDJqu.eq(3).text():", projectDJqu.eq(3).text());
+
+      const projectDJquByClass = $(".active");
+      projectDJquByClass.eq(1).text();
+      console.log(
+        "🚀 ~  projectDJquByClass.eq(1).text():",
+        projectDJquByClass.eq(1).text()
+      );
+
+      const submitBtn = $("button[name=submitButton]");
+      //submitBtn.click(alert("提交"));
+
+      submitBtn.on("click", () => {
+        alert("送出");
+      });
+    </script>
+  </body>
+</html>
