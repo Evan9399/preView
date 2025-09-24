@@ -1,0 +1,85 @@
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery 動態產生產品列表</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      /* 表格樣式設定 */
+      table {
+        border-collapse: collapse; /* 合併相鄰的邊框線，讓表格看起來是單線 */
+        margin-top: 10px; /* 表格上方留10像素空白 */
+        width: 100%; /* 表格寬度撐滿父元素的寬度 */
+      }
+
+      /* 表格中的儲存格(td)和表頭(th)樣式 */
+      td,
+      th {
+        border: 1px solid #999; /* 每個儲存格有1像素灰色邊框 */
+        padding: 6px 12px; /* 內距：上下6像素，左右12像素 */
+        text-align: center; /* 文字置中對齊 */
+      }
+
+      /* 輸入框的樣式 */
+      input {
+        margin-right: 10px; /* 輸入框右邊留10像素空間，避免擠在一起 */
+      }
+
+      /* 錯誤訊息文字樣式 */
+      .error {
+        color: red; /* 錯誤訊息文字呈現紅色 */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>產品資料輸入</h2>
+
+    <label>產品代號：<input type="text" id="codeInput" /></label>
+    <label>產品名稱：<input type="text" id="nameInput" /></label>
+    <label>價格：<input type="number" id="priceInput" /></label>
+    <label>庫存數量：<input type="number" id="stockInput" /></label>
+    <button id="addBtn">新增產品</button>
+
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>產品代號</th>
+          <th>產品名稱</th>
+          <th>價格</th>
+          <th>庫存數量</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 新增資料列會顯示在這裡 -->
+      </tbody>
+    </table>
+    <script src="../lib/jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        $("#addBtn").click(() => {
+          if (codeInput && nameInput && priceInput && stockInput) {
+            const codeInput = $("#codeInput").val().trim();
+            const nameInput = $("#nameInput").val().trim();
+            const priceInput = $("#priceInput").val().trim();
+            const stockInput = $("#stockInput").val().trim();
+            const delBtn = $("<button></button>").text("刪除");
+            const row = $("<tr></tr>").append(
+              `<td>${codeInput}</td>,
+              <td>${nameInput}</td>,
+              <td>${priceInput}</td>,
+              <td>${stockInput}</td>,
+              <td>${delBtn}</td>`
+            );
+
+            $("#productTable").append(row, delBtn);
+            $("#productTable").append(delBtn);
+            delBtn.click(() => {
+              row.remove();
+            });
+            $("#codeInput", "#nameInput", "#priceInput", "#stockInput").val("");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
